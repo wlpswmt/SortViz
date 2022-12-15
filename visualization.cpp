@@ -1,109 +1,103 @@
+
 #include "visualization.h"
 #include "ui_widget.h"
-#include"timecompare.h"
+#include "timecompare.h"
 #include <random>
 #include <algorithm>
-#include<QTimer>
+#include <QTimer>
+
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Widget)
-{
+
+    ui(new Ui::SortVIX) {
     ui->setupUi(this);
 
-    //æ—¶é—´æ€§èƒ½æ¯”è¾ƒçª—å£
-    time_comparison_scene =new TimeCompare;
-    //time_comparison_scene->setWindowTitle("æ—¶é—´æ€§èƒ½æ¯”è¾ƒ");
-    //scene = new QGraphicsScene(time_comparison_scene);
-
-
-    ui->on_time_comparison->setParent(this);
-    ui->on_time_comparison->move(1150,30);
-    ui->on_time_comparison->resize(200,30);
-    connect(ui->on_time_comparison,&QPushButton::clicked,time_comparison_scene,[=](){
-        QTimer::singleShot(500,this,[=](){
-            //è‡ªèº«éšè—
-            // this->hide();
-           time_comparison_scene->show();
+    //Ê±¼äĞÔÄÜ±È½Ï´°¿Ú
+    time_comparison_scene = new TimeCompare;
+    connect(ui->on_time_comparison, &QPushButton::clicked, time_comparison_scene, [ = ]() {
+        QTimer::singleShot(500, this, [ = ]() {
+            time_comparison_scene->show();
         });
 
-      });
+    });
 
 
-    //æ­å»ºå¯æ”¾ç½®äºŒç»´å›¾å½¢çš„QGraphicScene
+    //´î½¨¿É·ÅÖÃ¶şÎ¬Í¼ĞÎµÄQGraphicScene
     scene = new QGraphicsScene(this);
     ui->cellsToSortBackground->setScene(scene);
     ui->cellsToSortBackground->verticalScrollBar()->blockSignals(true);
     ui->cellsToSortBackground->horizontalScrollBar()->blockSignals(true);
 
-    //é…ç½®å˜é‡
+    //ÅäÖÃ±äÁ¿
     appStates = -1; // (-1) - App started
 
     sceneHeight = ui->cellsToSortBackground->size().height();
     sceneWidth = ui->cellsToSortBackground->size().width();
     comparisions = 0;
 
-    //è‡ªå®šä¹‰WidgetList åˆå§‹åŒ–QMap
-    for(int i=0; i < ui->algorithmSelection->count(); i++)
-    {
-        QListWidgetItem * item = ui->algorithmSelection->item(i);
+    //×Ô¶¨ÒåWidgetList ³õÊ¼»¯QMap
+    for (int i = 0; i < ui->algorithmSelection->count(); i++) {
+        QListWidgetItem *item = ui->algorithmSelection->item(i);
         item -> setSizeHint(QSize(item->sizeHint().width(), 50));
         AlgorithmList.insert(i, item->text());
-        //TimeCompare::InsertNode(item->text());
-       // TableWidgetItem->AlgorithmsName[i]=(item->text());
     }
 
-    //ä¸å¯æŒ‰
+    //²»¿É°´
     ui->amountChanger->setDisabled(true);
     ui->delayChanger->setDisabled(true);
     ui->sortButton->setDisabled(true);
 
-    //å»¶è¿Ÿ1ms,åˆå§‹åŒ–100ä¸ªã€‚
-    columnsSetUp(1, 100, 0);
+    //ÑÓ³Ù1ms,³õÊ¼500¸öÊı×Ö£¬Ä¬ÈÏÂÒĞòÄ£Ê½
+    columnsSetUp(1, 500, 0);
 }
 
-void Widget::columnsSetUp(int ms, int n, int model)
-{
-    //configuring variables
+void Widget::columnsSetUp(int ms, int n, int model) {
+    // ³õÊ¼»¯´°¿Ú±äÁ¿
     ui->LabelComparisions_var->setNum(0);
     ui->LabelArrayAccesses_var->setNum(0);
+    ui->LabelRunTime_var->setNum(0);
     sortDelay = ms;
     amountOfColumns = n;
     columnsWidth = sceneWidth / amountOfColumns;
 
-    //setting up columns to sort
+    // ÉèÖÃ¾ØĞÎ¿í¶È
     columns.resize(static_cast<unsigned>(amountOfColumns));
 
-    //setting up columns height
+    // ÉèÖÃ¾ØĞÎ¸ß¶È
     double incrementBy = sceneHeight / amountOfColumns;
-    for(auto i = incrementBy; i <= sceneHeight; i += incrementBy)
+    for (auto i = incrementBy; i <= sceneHeight; i += incrementBy)
         columnsHeight.push_back(i);
 
-    //randomize an array
+    // Éú³ÉÊı×é
     std::random_device m_random;
     std::mt19937 e_random(m_random());
-    switch(model)
-    {
-    case 0: std::shuffle(columnsHeight.begin(), columnsHeight.end(), e_random); break;
-    case 1: break;
-    case 2: std::sort(columnsHeight.begin(), columnsHeight.end(),[](int a, int b){
-            return b<a;
-        });break;
+    switch (model) {
+        case 0:
+            std::shuffle(columnsHeight.begin(), columnsHeight.end(), e_random);
+            break;
+        case 1:
+            std::sort(columnsHeight.begin(), columnsHeight.end());
+            break;
+        case 2:
+            std::sort(columnsHeight.begin(), columnsHeight.end(), [](int a, int b) {
+                return b < a;
+            });
+            break;
     }
 
 
 
-    //aplying columns to scene
+    // Ïò»­²¼°ó¶¨¾ØĞÎ
     auto j = 0;
     auto k = 0.0;
-    for(auto &p : columns)
-    {
+    for (auto &p : columns) {
         p = new QGraphicsRectItem;
-        p->setRect(k, (sceneHeight - columnsHeight[j]), columnsWidth , columnsHeight[j]);
-        p->setBrush(QBrush(QColor(255, 0, 68, 255)));
+        p->setRect(k, (sceneHeight - columnsHeight[j]), columnsWidth, columnsHeight[j]);
+        p->setBrush(QBrush(QColor(255, 0, 0, 255)));
 
-        if(amountOfColumns <= 200)
+        if (amountOfColumns <= 200)
             p->setPen(QPen(Qt::black, 2));
-        else if(amountOfColumns > 200 && amountOfColumns <= 300)
+        else if (amountOfColumns > 200 && amountOfColumns <= 300)
             p->setPen(QPen(Qt::black, 1));
         else
             p->setPen(Qt::NoPen);
@@ -115,9 +109,8 @@ void Widget::columnsSetUp(int ms, int n, int model)
     }
 }
 
-void Widget::resetColumns(int ms, int n, int model)
-{
-    for(auto &p : columns)
+void Widget::resetColumns(int ms, int n, int model) {
+    for (auto &p : columns)
         scene->removeItem(p);
 
     columnsHeight.clear();
@@ -125,20 +118,17 @@ void Widget::resetColumns(int ms, int n, int model)
     threadUpdate(sortDelay, algorithmKey);
 }
 
-void Widget::threadUpdate(int ms, int key)
-{
+void Widget::threadUpdate(int ms, int key) {
     mThread = new Thread(ms, key, static_cast<int>(amountOfColumns), columnsHeight, this);
-
     connect(mThread, SIGNAL(comparision(int, int)), this, SLOT(on_comparision(int, int)));
     connect(mThread, SIGNAL(sortDone(int, int)), this, SLOT(sortDone(int, int)));
     connect(mThread, SIGNAL(arrayAccess(int)), ui->LabelArrayAccesses_var, SLOT(setNum(int)));     //SLOT(setNum(int))
     connect(mThread, SIGNAL(changeButtonStatus(int)), this, SLOT(sortButtonStatus(int)));
+
 }
 
-void Widget::on_algorithmSelection_itemClicked(QListWidgetItem *item)
-{
-    if(appStates == -1)
-    {
+void Widget::on_algorithmSelection_itemClicked(QListWidgetItem *item) {
+    if (appStates == -1) {
         ui->sortButton->setEnabled(true);
         ui->amountChanger->setEnabled(true);
         ui->delayChanger->setEnabled(true);
@@ -147,46 +137,49 @@ void Widget::on_algorithmSelection_itemClicked(QListWidgetItem *item)
         sortButtonStatus(appStates);
     }
 
-    if(appStates == 0)
-    {
+    if (appStates == 0) {
         algorithmKey = AlgorithmList.key(item->text());
         ui->LabelSortingWith_var->setText(item->text());
     }
 }
 
-void Widget::on_amountChanger_valueChanged(int n)
-{
-    if(appStates == 0)
+void Widget::on_amountChanger_valueChanged(int n) {
+    // if (appStates == 0)
         resetColumns(sortDelay, n, 0);
 }
 
-void Widget::on_delayChanger_valueChanged(int ms)
-{
-    if(appStates == 0)
+void Widget::on_delayChanger_valueChanged(int ms) {
+    // if (appStates == 0)
         resetColumns(ms, static_cast<int>(amountOfColumns), 0);
 }
 
 
-void Widget::on_sortButton_clicked()
-{
-    switch(appStates)
-    {
-        case 0:
+void Widget::on_sortButton_clicked() {
+    switch (appStates) {
+        case 0: {
+            timer1 = new QTimer();
+            timer1->start(1);
+            timer_i = 0;
+            connect(timer1, SIGNAL(timeout()), this, SLOT(on_RunTime()));
             sortButtonStatus(1);
             comparisions = 0;
             threadUpdate(sortDelay, algorithmKey);
             mThread->start();
             break;
-
+        }
         case 1:
+            timer1->stop();
+            timer_i = 0;
             mThread->terminate();
             sortButtonStatus(2);
             break;
 
         case 2:
-            for(auto &p : columns)
+            // timer1->stop();
+            //timer_i=0;
+            for (auto &p : columns)
                 scene->removeItem(p);
-
+            ui->LabelRunTime_var->setNum(0);
             columnsHeight.clear();
             columnsSetUp(sortDelay, static_cast<int>(amountOfColumns), 0);
             sortButtonStatus(0);
@@ -197,34 +190,34 @@ void Widget::on_sortButton_clicked()
     }
 }
 
-void Widget::sortButtonStatus(int state)
-{
+
+
+void Widget::sortButtonStatus(int state) {
     QString buttonText;
     QString style;
 
-    switch(state)
-    {
-    case 0:
-        buttonText = "sort";
-        ui->amountChanger->setEnabled(true);
-        ui->delayChanger->setEnabled(true);
-        ui->algorithmSelection->setEnabled(true);
-        style = "background-color: rgba(255, 0, 68, 255); color: #fff";
-        break;
+    switch (state) {
+        case 0:
+            buttonText = "sort";
+            ui->amountChanger->setEnabled(true);
+            ui->delayChanger->setEnabled(true);
+            ui->algorithmSelection->setEnabled(true);
+            style = "background-color: rgba(255, 0, 68, 255); color: #fff";
+            break;
 
-    case 1:
-        buttonText = "cancel";
-        ui->amountChanger->setDisabled(true);
-        ui->delayChanger->setDisabled(true);
-        ui->algorithmSelection->setDisabled(true);
-        style = "background-color: #000; color: #fff";
-        break;
+        case 1:
+            buttonText = "cancel";
+            ui->amountChanger->setDisabled(true);
+            ui->delayChanger->setDisabled(true);
+            ui->algorithmSelection->setDisabled(true);
+            style = "background-color: #000; color: #fff";
+            break;
 
-    case 2:
-        buttonText = "new sort";
-        ui->sortButton->setEnabled(true);
-        style = "background-color: rgb(85, 0, 255); color: #fff";
-        break;
+        case 2:
+            buttonText = "new sort";
+            ui->sortButton->setEnabled(true);
+            style = "background-color: rgb(85, 0, 255); color: #fff";
+            break;
     }
 
     appStates = state;
@@ -232,8 +225,7 @@ void Widget::sortButtonStatus(int state)
     ui->sortButton->setStyleSheet(style);
 }
 
-void Widget::on_comparision(int n, int k)
-{
+void Widget::on_comparision(int n, int k) {
     auto nRect = columns[n]->rect();
     auto kRect = columns[k]->rect();
     auto nColumnPos = nRect.left();
@@ -251,24 +243,22 @@ void Widget::on_comparision(int n, int k)
     ui->LabelComparisions_var->setNum(comparisions);
 }
 
-void Widget::sortDone(int n, int sortWith)
-{
-    columns[n]->setBrush(QBrush(QColor(0,200,0)));
+void Widget::sortDone(int n, int sortWith) {
+    timer1->stop();
+    columns[n]->setBrush(QBrush(QColor(0, 200, 0)));
     time_comparison_scene->SetData(sortWith, 0, new QTableWidgetItem(ui->LabelArrayAccesses_var->text()));
     time_comparison_scene->SetData(sortWith, 1, new QTableWidgetItem(ui->LabelComparisions_var->text()));
-    // time_comparison_scene->SetData(sortWith, 3, new QTableWidgetItem(ui->LabelArrayAccesses->text()));
+    time_comparison_scene->SetData(sortWith, 2, new QTableWidgetItem(ui->LabelRunTime_var->text()));
 }
 
-Widget::~Widget()
-{
+Widget::~Widget() {
     mThread->terminate();
     delete ui;
 }
 
 
-void Widget::on_change_num_disorder_clicked()
-{
-    for(auto &p : columns)
+void Widget::on_change_num_disorder_clicked() {
+    for (auto &p : columns)
         scene->removeItem(p);
 
     columnsHeight.clear();
@@ -276,9 +266,8 @@ void Widget::on_change_num_disorder_clicked()
     threadUpdate(sortDelay, algorithmKey);
 }
 
-void Widget::on_change_num_to_order_clicked()
-{
-    for(auto &p : columns)
+void Widget::on_change_num_to_order_clicked() {
+    for (auto &p : columns)
         scene->removeItem(p);
 
     columnsHeight.clear();
@@ -286,12 +275,17 @@ void Widget::on_change_num_to_order_clicked()
     threadUpdate(sortDelay, algorithmKey);
 }
 
-void Widget::on_change_num_to_re_order_clicked()
-{
-    for(auto &p : columns)
+void Widget::on_change_num_to_re_order_clicked() {
+    for (auto &p : columns)
         scene->removeItem(p);
 
     columnsHeight.clear();
     columnsSetUp(1, columns.size(), 2);
     threadUpdate(sortDelay, algorithmKey);
 }
+
+
+void Widget::on_RunTime() {
+    ui->LabelRunTime_var->setNum(timer_i++);
+}
+

@@ -13,7 +13,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGraphicsView>
-#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QListWidget>
@@ -25,7 +24,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Widget
+class Ui_SortVIX
 {
 public:
     QHBoxLayout *horizontalLayout_8;
@@ -34,11 +33,7 @@ public:
     QSpacerItem *horizontalSpacer_4;
     QFrame *frame;
     QVBoxLayout *verticalLayout;
-    QGroupBox *groupBox;
-    QHBoxLayout *horizontalLayout_9;
-    QSpacerItem *horizontalSpacer_6;
     QPushButton *on_time_comparison;
-    QSpacerItem *horizontalSpacer_5;
     QPushButton *change_num_disorder;
     QPushButton *change_num_to_order;
     QPushButton *change_num_to_re_order;
@@ -52,6 +47,10 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *LabelSortingWith;
     QLabel *LabelSortingWith_var;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout_9;
+    QLabel *RunTime;
+    QLabel *LabelRunTime_var;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout_6;
     QLabel *LabelAmountChanger;
@@ -67,12 +66,12 @@ public:
     QSpacerItem *horizontalSpacer_2;
     QSpacerItem *horizontalSpacer_3;
 
-    void setupUi(QWidget *Widget)
+    void setupUi(QWidget *SortVIX)
     {
-        if (Widget->objectName().isEmpty())
-            Widget->setObjectName(QString::fromUtf8("Widget"));
-        Widget->resize(1374, 720);
-        Widget->setStyleSheet(QString::fromUtf8("QWidget {\n"
+        if (SortVIX->objectName().isEmpty())
+            SortVIX->setObjectName(QString::fromUtf8("SortVIX"));
+        SortVIX->resize(1374, 720);
+        SortVIX->setStyleSheet(QString::fromUtf8("QWidget {\n"
 "  background-color: #fff;\n"
 "	font: 25 11pt \"Roboto Light\";\n"
 "	color: rgba(0, 0, 0, 100);\n"
@@ -133,14 +132,14 @@ public:
 "  border: 1px solid rgba(0, 0, 0, 20);\n"
 "  color:  rgba(0, 0, 0, 50);\n"
 "}"));
-        horizontalLayout_8 = new QHBoxLayout(Widget);
+        horizontalLayout_8 = new QHBoxLayout(SortVIX);
         horizontalLayout_8->setSpacing(6);
         horizontalLayout_8->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        cellsToSortBackground = new QGraphicsView(Widget);
+        cellsToSortBackground = new QGraphicsView(SortVIX);
         cellsToSortBackground->setObjectName(QString::fromUtf8("cellsToSortBackground"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
@@ -162,7 +161,7 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer_4);
 
-        frame = new QFrame(Widget);
+        frame = new QFrame(SortVIX);
         frame->setObjectName(QString::fromUtf8("frame"));
         QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Expanding);
         sizePolicy1.setHorizontalStretch(0);
@@ -176,32 +175,10 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        groupBox = new QGroupBox(frame);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        horizontalLayout_9 = new QHBoxLayout(groupBox);
-        horizontalLayout_9->setSpacing(6);
-        horizontalLayout_9->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
-        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_9->addItem(horizontalSpacer_6);
-
-        on_time_comparison = new QPushButton(groupBox);
+        on_time_comparison = new QPushButton(frame);
         on_time_comparison->setObjectName(QString::fromUtf8("on_time_comparison"));
-        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(on_time_comparison->sizePolicy().hasHeightForWidth());
-        on_time_comparison->setSizePolicy(sizePolicy2);
 
-        horizontalLayout_9->addWidget(on_time_comparison);
-
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_9->addItem(horizontalSpacer_5);
-
-
-        verticalLayout->addWidget(groupBox);
+        verticalLayout->addWidget(on_time_comparison);
 
         change_num_disorder = new QPushButton(frame);
         change_num_disorder->setObjectName(QString::fromUtf8("change_num_disorder"));
@@ -279,6 +256,25 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_2);
 
+        widget = new QWidget(frame);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        horizontalLayout_9 = new QHBoxLayout(widget);
+        horizontalLayout_9->setSpacing(6);
+        horizontalLayout_9->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        RunTime = new QLabel(widget);
+        RunTime->setObjectName(QString::fromUtf8("RunTime"));
+
+        horizontalLayout_9->addWidget(RunTime);
+
+        LabelRunTime_var = new QLabel(widget);
+        LabelRunTime_var->setObjectName(QString::fromUtf8("LabelRunTime_var"));
+
+        horizontalLayout_9->addWidget(LabelRunTime_var);
+
+
+        verticalLayout->addWidget(widget);
+
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Fixed);
 
         verticalLayout->addItem(verticalSpacer);
@@ -294,16 +290,19 @@ public:
 
         amountChanger = new QSpinBox(frame);
         amountChanger->setObjectName(QString::fromUtf8("amountChanger"));
+        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(amountChanger->sizePolicy().hasHeightForWidth());
         amountChanger->setSizePolicy(sizePolicy2);
         amountChanger->setMinimumSize(QSize(0, 0));
         amountChanger->setCursor(QCursor(Qt::PointingHandCursor));
         amountChanger->setStyleSheet(QString::fromUtf8(""));
         amountChanger->setReadOnly(false);
-        amountChanger->setMinimum(50);
-        amountChanger->setMaximum(500);
+        amountChanger->setMinimum(5);
+        amountChanger->setMaximum(999999999);
         amountChanger->setSingleStep(50);
-        amountChanger->setValue(100);
+        amountChanger->setValue(500);
         amountChanger->setDisplayIntegerBase(10);
 
         horizontalLayout_6->addWidget(amountChanger);
@@ -413,58 +412,60 @@ public:
         horizontalLayout_8->addItem(horizontalSpacer_3);
 
 
-        retranslateUi(Widget);
+        retranslateUi(SortVIX);
 
-        QMetaObject::connectSlotsByName(Widget);
+        QMetaObject::connectSlotsByName(SortVIX);
     } // setupUi
 
-    void retranslateUi(QWidget *Widget)
+    void retranslateUi(QWidget *SortVIX)
     {
-        Widget->setWindowTitle(QCoreApplication::translate("Widget", "Widget", nullptr));
-        on_time_comparison->setText(QCoreApplication::translate("Widget", "\346\227\266\351\227\264\346\200\247\350\203\275\346\257\224\350\276\203", nullptr));
-        change_num_disorder->setText(QCoreApplication::translate("Widget", "\344\271\261\345\272\217\346\225\260", nullptr));
-        change_num_to_order->setText(QCoreApplication::translate("Widget", "\346\255\243\345\272\217\346\225\260", nullptr));
-        change_num_to_re_order->setText(QCoreApplication::translate("Widget", "\351\200\206\345\272\217\346\225\260", nullptr));
-        LabelArrayAccesses->setText(QCoreApplication::translate("Widget", "<html><head/><body><p>Array Accesses:</p></body></html>", nullptr));
-        LabelArrayAccesses_var->setText(QCoreApplication::translate("Widget", "<html><head/><body><p>0</p></body></html>", nullptr));
-        LabelComparisions->setText(QCoreApplication::translate("Widget", "<html><head/><body><p>Comparisions:</p></body></html>", nullptr));
-        LabelComparisions_var->setText(QCoreApplication::translate("Widget", "<html><head/><body><p>0</p></body></html>", nullptr));
-        LabelSortingWith->setText(QCoreApplication::translate("Widget", "<html><head/><body><p>Sorting with:</p></body></html>", nullptr));
-        LabelSortingWith_var->setText(QCoreApplication::translate("Widget", "<html><head/><body><p>Select an algorithm..</p></body></html>", nullptr));
-        LabelAmountChanger->setText(QCoreApplication::translate("Widget", "<html><head/><body><p>Amount of columns</p></body></html>", nullptr));
-        LabelDelayChanger->setText(QCoreApplication::translate("Widget", "<html><head/><body><p>Delay</p></body></html>", nullptr));
+        SortVIX->setWindowTitle(QCoreApplication::translate("SortVIX", "SortVIX", nullptr));
+        on_time_comparison->setText(QCoreApplication::translate("SortVIX", "\346\200\247\350\203\275\346\257\224\350\276\203", nullptr));
+        change_num_disorder->setText(QCoreApplication::translate("SortVIX", "\344\271\261\345\272\217\346\225\260", nullptr));
+        change_num_to_order->setText(QCoreApplication::translate("SortVIX", "\346\255\243\345\272\217\346\225\260", nullptr));
+        change_num_to_re_order->setText(QCoreApplication::translate("SortVIX", "\351\200\206\345\272\217\346\225\260", nullptr));
+        LabelArrayAccesses->setText(QCoreApplication::translate("SortVIX", "<html><head/><body><p>Array Accesses:</p></body></html>", nullptr));
+        LabelArrayAccesses_var->setText(QCoreApplication::translate("SortVIX", "<html><head/><body><p>0</p></body></html>", nullptr));
+        LabelComparisions->setText(QCoreApplication::translate("SortVIX", "<html><head/><body><p>Comparisions:</p></body></html>", nullptr));
+        LabelComparisions_var->setText(QCoreApplication::translate("SortVIX", "<html><head/><body><p>0</p></body></html>", nullptr));
+        LabelSortingWith->setText(QCoreApplication::translate("SortVIX", "<html><head/><body><p>Sorting with:</p></body></html>", nullptr));
+        LabelSortingWith_var->setText(QCoreApplication::translate("SortVIX", "<html><head/><body><p>Select an algorithm..</p></body></html>", nullptr));
+        RunTime->setText(QCoreApplication::translate("SortVIX", "RunTime:", nullptr));
+        LabelRunTime_var->setText(QCoreApplication::translate("SortVIX", "0", nullptr));
+        LabelAmountChanger->setText(QCoreApplication::translate("SortVIX", "<html><head/><body><p>Amount of columns</p></body></html>", nullptr));
+        LabelDelayChanger->setText(QCoreApplication::translate("SortVIX", "<html><head/><body><p>Delay</p></body></html>", nullptr));
 
         const bool __sortingEnabled = algorithmSelection->isSortingEnabled();
         algorithmSelection->setSortingEnabled(false);
         QListWidgetItem *___qlistwidgetitem = algorithmSelection->item(0);
-        ___qlistwidgetitem->setText(QCoreApplication::translate("Widget", "Bubble Sort", nullptr));
+        ___qlistwidgetitem->setText(QCoreApplication::translate("SortVIX", "Bubble Sort", nullptr));
         QListWidgetItem *___qlistwidgetitem1 = algorithmSelection->item(1);
-        ___qlistwidgetitem1->setText(QCoreApplication::translate("Widget", "Recursive Bubble Sort", nullptr));
+        ___qlistwidgetitem1->setText(QCoreApplication::translate("SortVIX", "Recursive Bubble Sort", nullptr));
         QListWidgetItem *___qlistwidgetitem2 = algorithmSelection->item(2);
-        ___qlistwidgetitem2->setText(QCoreApplication::translate("Widget", "Cocktail Sort", nullptr));
+        ___qlistwidgetitem2->setText(QCoreApplication::translate("SortVIX", "Cocktail Sort", nullptr));
         QListWidgetItem *___qlistwidgetitem3 = algorithmSelection->item(3);
-        ___qlistwidgetitem3->setText(QCoreApplication::translate("Widget", "Gnome Sort", nullptr));
+        ___qlistwidgetitem3->setText(QCoreApplication::translate("SortVIX", "Gnome Sort", nullptr));
         QListWidgetItem *___qlistwidgetitem4 = algorithmSelection->item(4);
-        ___qlistwidgetitem4->setText(QCoreApplication::translate("Widget", "Quick Sort", nullptr));
+        ___qlistwidgetitem4->setText(QCoreApplication::translate("SortVIX", "Quick Sort", nullptr));
         QListWidgetItem *___qlistwidgetitem5 = algorithmSelection->item(5);
-        ___qlistwidgetitem5->setText(QCoreApplication::translate("Widget", "Heap Sort", nullptr));
+        ___qlistwidgetitem5->setText(QCoreApplication::translate("SortVIX", "Heap Sort", nullptr));
         QListWidgetItem *___qlistwidgetitem6 = algorithmSelection->item(6);
-        ___qlistwidgetitem6->setText(QCoreApplication::translate("Widget", "Insert Sort", nullptr));
+        ___qlistwidgetitem6->setText(QCoreApplication::translate("SortVIX", "Insert Sort", nullptr));
         QListWidgetItem *___qlistwidgetitem7 = algorithmSelection->item(7);
-        ___qlistwidgetitem7->setText(QCoreApplication::translate("Widget", "select Sort", nullptr));
+        ___qlistwidgetitem7->setText(QCoreApplication::translate("SortVIX", "select Sort", nullptr));
         QListWidgetItem *___qlistwidgetitem8 = algorithmSelection->item(8);
-        ___qlistwidgetitem8->setText(QCoreApplication::translate("Widget", "Shell Sort", nullptr));
+        ___qlistwidgetitem8->setText(QCoreApplication::translate("SortVIX", "Shell Sort", nullptr));
         QListWidgetItem *___qlistwidgetitem9 = algorithmSelection->item(9);
-        ___qlistwidgetitem9->setText(QCoreApplication::translate("Widget", "Merge Sort", nullptr));
+        ___qlistwidgetitem9->setText(QCoreApplication::translate("SortVIX", "Merge Sort", nullptr));
         algorithmSelection->setSortingEnabled(__sortingEnabled);
 
-        sortButton->setText(QCoreApplication::translate("Widget", "sort", nullptr));
+        sortButton->setText(QCoreApplication::translate("SortVIX", "sort", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class Widget: public Ui_Widget {};
+    class SortVIX: public Ui_SortVIX {};
 } // namespace Ui
 
 QT_END_NAMESPACE

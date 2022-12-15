@@ -8,7 +8,7 @@
 #include "algorithms.h"
 
 namespace Ui {
-class Widget;
+class SortVIX;
 }
 
 class Thread;
@@ -30,6 +30,7 @@ private slots:
     void on_amountChanger_valueChanged(int);
     void on_delayChanger_valueChanged(int);
 
+    void on_RunTime();
     void on_comparision(int, int);
     void sortButtonStatus(int);
     void sortDone(int, int);
@@ -42,12 +43,14 @@ private slots:
     void on_change_num_to_re_order_clicked();
 
 private:
-    Ui::Widget *ui;
-    Thread *mThread;
+    Ui::SortVIX *ui;
+    Thread *mThread;  //子线程
+    QTimer *timer1;
     QGraphicsScene *scene;
-
-    //setting up columns, shuffeling them
+    int timer_i;
+    //设置数组
     void columnsSetUp(int, int, int);
+    // 更新线程
     void threadUpdate(int, int);
 
     _vector<QGraphicsRectItem*> columns;
@@ -55,7 +58,7 @@ private:
 
     QMap<int, QString> AlgorithmList;
 
-    //delay of sorting in ms
+    // 延迟
     int sortDelay;
 
     double columnsWidth;
@@ -64,9 +67,8 @@ private:
 
     int amountOfColumns;
     int comparisions;
-    //int arrayaccess;
 
-    //key which is use to establish the algorithm to sort columns
+    // 算法键值
     int algorithmKey;
 
     // (-1) - App started, 0 - App ready to sort, (1) - App sorting, (2) - App sorted  程序运行状态

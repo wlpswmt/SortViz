@@ -1,13 +1,15 @@
 #include "algorithms.h"
 #include"timecompare.h"
 
+QTimer* Thread:: myTimer= NULL ;
+
 Thread::Thread(int ms, int alg, int n, _vector<double> col, QObject *parent = nullptr) : QThread(parent)
 {
     sortWith = alg;
     amount = n;
     columnsHeight = col;
     arrayAccessVariable = 0;
-    sortDoneDelay = (amount >= 300 ? 2 : 5);
+    sortDoneDelay = (amount >= 300 ? 1 : 5);
     sortDelay = ms;
 
 }
@@ -49,7 +51,6 @@ void Thread::swap(int n, int k)
 void Thread::isAccessToArray()
 {
     arrayAccessVariable++;  //数组访问次数++
-   // TableWidgetItem->arrayAccess=arrayAccessVariable;
     emit arrayAccess(arrayAccessVariable);
 }
 
@@ -61,10 +62,12 @@ void Thread::BubbleSort()
         for(auto j = 0; j< amount-1; j++)
         {
             if(columnsHeight[j] > columnsHeight[j+1])
+            {
                 swap(j, j+1);
+                msleep(sortDelay);
+            }
 
             isAccessToArray();
-            msleep(sortDelay);
         }
 }
 
@@ -163,15 +166,15 @@ int Thread::QuickSortPartition(int arrayBegin, int arrayEnd)
         {
             i++;
             swap(i, j);
+            msleep(sortDelay);
         }
 
         isAccessToArray();
-        msleep(sortDelay);
     }
 
     swap(i+1, arrayEnd);
 
-    msleep(sortDelay);
+
     return(i + 1);
 }
 
@@ -230,7 +233,7 @@ void Thread::HeapSort()
     }
 }
 
-//-------Insert Sort--------
+//-------INSERT SORT--------
 
 void Thread::InsertSort()
 {
@@ -250,7 +253,7 @@ void Thread::InsertSort()
     }
 }
 
-//------Shell Sort--------
+//------SHELL SORT--------
 
 void Thread::ShellSort()
 {
@@ -277,7 +280,7 @@ void Thread::ShellSort()
     }
 }
 
-//-----select sort---------
+//-----SELECT SORT---------
 
 void Thread::SelectSort()
 {
@@ -295,7 +298,7 @@ void Thread::SelectSort()
     }
 }
 
-//------merge sort---------
+//------MERGE SORT---------
 void Thread::merge(int arrayBegin, int arrayMid, int arrayEnd)
 {
     _vector<double> temp = columnsHeight;

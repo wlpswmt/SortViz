@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
@@ -20,6 +21,7 @@ QT_BEGIN_NAMESPACE
 class Ui_Form
 {
 public:
+    QHBoxLayout *horizontalLayout;
     QTableWidget *tableWidget;
 
     void setupUi(QWidget *Form)
@@ -33,6 +35,8 @@ public:
         sizePolicy.setHeightForWidth(Form->sizePolicy().hasHeightForWidth());
         Form->setSizePolicy(sizePolicy);
         Form->setMinimumSize(QSize(1000, 700));
+        horizontalLayout = new QHBoxLayout(Form);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         tableWidget = new QTableWidget(Form);
         if (tableWidget->columnCount() < 3)
             tableWidget->setColumnCount(3);
@@ -65,9 +69,11 @@ public:
         QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
         tableWidget->setVerticalHeaderItem(9, __qtablewidgetitem12);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        tableWidget->setGeometry(QRect(40, 40, 781, 461));
         sizePolicy.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
         tableWidget->setSizePolicy(sizePolicy);
+
+        horizontalLayout->addWidget(tableWidget);
+
 
         retranslateUi(Form);
 

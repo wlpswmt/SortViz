@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Widget</class>
- <widget class="QWidget" name="Widget">
+ <class>SortVIX</class>
+ <widget class="QWidget" name="SortVIX">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Widget</string>
+   <string>SortVIX</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget {
@@ -148,48 +148,10 @@ background-color:rgb(31, 31, 31)</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QGroupBox" name="groupBox">
-          <layout class="QHBoxLayout" name="horizontalLayout_9">
-           <item>
-            <spacer name="horizontalSpacer_6">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="on_time_comparison">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>时间性能比较</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_5">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
+         <widget class="QPushButton" name="on_time_comparison">
+          <property name="text">
+           <string>性能比较</string>
+          </property>
          </widget>
         </item>
         <item>
@@ -311,6 +273,26 @@ background-color:rgb(31, 31, 31)</string>
          </layout>
         </item>
         <item>
+         <widget class="QWidget" name="widget" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout_9">
+           <item>
+            <widget class="QLabel" name="RunTime">
+             <property name="text">
+              <string>RunTime:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="LabelRunTime_var">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
          <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -362,16 +344,16 @@ background-color:rgb(31, 31, 31)</string>
              <bool>false</bool>
             </property>
             <property name="minimum">
-             <number>50</number>
+             <number>5</number>
             </property>
             <property name="maximum">
-             <number>500</number>
+             <number>999999999</number>
             </property>
             <property name="singleStep">
              <number>50</number>
             </property>
             <property name="value">
-             <number>100</number>
+             <number>500</number>
             </property>
             <property name="displayIntegerBase">
              <number>10</number>

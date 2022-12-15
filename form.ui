@@ -25,87 +25,83 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTableWidget" name="tableWidget">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>40</y>
-     <width>781</width>
-     <height>461</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <row>
-    <property name="text">
-     <string>Bubble Sort</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Recursive Bubble Sort</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Cocktail Sort</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Gnome Sort</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Quick Sort</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Heap Sort</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Insert Sort</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Select Sort</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Shell Sort</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Merge Sort</string>
-    </property>
-   </row>
-   <column>
-    <property name="text">
-     <string>ArrayAccess</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Comparisons</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Run Time</string>
-    </property>
-   </column>
-  </widget>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <row>
+      <property name="text">
+       <string>Bubble Sort</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Recursive Bubble Sort</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Cocktail Sort</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Gnome Sort</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Quick Sort</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Heap Sort</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Insert Sort</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Select Sort</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Shell Sort</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Merge Sort</string>
+      </property>
+     </row>
+     <column>
+      <property name="text">
+       <string>ArrayAccess</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Comparisons</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Run Time</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
