@@ -1,2 +1,2 @@
 # SortViz
-Simple curriculum design for sophomore students
+A tool which can calculate effiency of some sorting algorithms.(Simple curriculum design for sophomore)
